@@ -2,6 +2,8 @@ from h11 import Data
 import requests
 import pandas as pd
 
+#Parameters set by Insomnia tool to access the products API from vegangrocerystore.
+
 url = "https://www.vegangrocerystore.com.au/collections/vegan-cheese"
 
 querystring = {"view":"elspw-json"}
@@ -20,6 +22,8 @@ headers = {
     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36",
     "x-requested-with": "XMLHttpRequest"
 }
+
+#Function to get the data from the API, and return an output in a dictionary.
 
 def GetData():
 
@@ -53,10 +57,14 @@ def GetData():
 
     return OutPut
 
+#Function to export the data to an excel spreadsheet.
+
 def SaveData(Data):
 
     df = pd.DataFrame(Data, columns=['Title and description', 'Tags'])
     df.to_excel('Vegan cheese products.xls', index=False, columns=['Title and description', 'Tags'])
 
+
+#Running the functions.
 
 SaveData(GetData())
